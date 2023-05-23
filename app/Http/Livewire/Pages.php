@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 
 class Pages extends Component
 {
+    public $modelId;
     public $title;
     public $slug;
     public $content;
@@ -52,6 +53,18 @@ class Pages extends Component
         $this->resetVars();
     }
 
+    public function read()
+    {
+        return Page::paginate(10);
+    }
+
+    public function updateShowModal($id)
+    {
+        $this->modelId = $id;
+        $this->modalFormVisible = true;
+        $this->loadModel();
+    }
+
     /**
      * Show the modal
      *
@@ -76,6 +89,21 @@ class Pages extends Component
         ];
     }
 
+    public function loadModel()
+    {
+        $data = Page::find($this->modelId);
+        $this->title = $data->title;
+        $this->slug = $data->slug;
+        $this->content = $this->content;
+    }
+
+    /**
+     * Treating our slug value replacing the spaces
+     *
+     * @param $value $first $second [explicite description]
+     *
+     * @return void
+     */
     public function generateSlug($value)
     {
         $first = str_replace(' ', '-', $value);
@@ -102,6 +130,8 @@ class Pages extends Component
      */
     public function render()
     {
-        return view('livewire.pages');
+        return view('livewire.pages', [
+            'data' => $this->read()
+        ]);
     }
 }
