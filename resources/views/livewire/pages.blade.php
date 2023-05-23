@@ -23,11 +23,20 @@
                 <x-input type="text" id="slug" wire:model="slug" class="rounded dark:bg-gray-800" placeholder="slug here" />
                 <x-input-error for="slug" class="mt-2" />
             </div>
-
-                <x-label for="content" value="{{ __('Content') }}" />
-                <x-input id="content" type="text" class="mt-1 block w-full"
-                    wire:model.defer="createApiTokenForm.content" autofocus />
-                <x-input-error for="content" class="mt-2" />
+            <x-label for="content" value="{{ __('Content') }}" />
+            <div class="rounded-md shadow-sm">
+                <div class="mt-1 bg-white">                      
+                    <div class="body-content" wire:ignore>                            
+                        <trix-editor
+                            class="trix-content"
+                            x-ref="trix"
+                            wire:model.debounce.100000ms="content"
+                            wire:key="trix-content-unique-key"
+                        ></trix-editor>
+                    </div>
+                </div>
+            </div>
+            <x-input-error for="content" class="mt-2" />
         </x-slot>
 
         <x-slot name="footer">

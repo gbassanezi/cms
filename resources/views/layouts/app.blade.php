@@ -16,6 +16,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @trixassets
     </head>
     <body class="font-sans antialiased">
         <x-banner />
