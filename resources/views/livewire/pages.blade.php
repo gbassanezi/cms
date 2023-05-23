@@ -70,12 +70,13 @@
     {{-- Form Modal --}}
     <x-dialog-modal wire:model="modalFormVisible">
         <x-slot name="title">
+            {{ __('Save Page') }} {{ $modelId }}
+        </x-slot>
+        <x-slot name="content">
             <x-label for="title" value="{{ __('Title') }}" />
             <x-input id="title" type="text" class="block w-full mt-1" wire:model.debounce.800ms="title"
                 autofocus />
             <x-input-error for="title" class="mt-2" /><br>
-        </x-slot>
-        <x-slot name="content">
             <x-label for="slug" value="{{ __('Slug') }}" />
             <div class="relative flex flex-wrap items-stretch w-full mb-4">
                 <span
