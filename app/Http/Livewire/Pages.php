@@ -13,6 +13,7 @@ class Pages extends Component
     public $slug;
     public $content;
     public $modalFormVisible = false;
+    public $modalConfirmDeleteVisible = false;
 
     /**
      * Our validation rules when receveing the data from the modal
@@ -58,11 +59,17 @@ class Pages extends Component
         return Page::paginate(10);
     }
 
-    public function updateShowModal($id)
+    public function update()
     {
-        $this->modelId = $id;
-        $this->modalFormVisible = true;
-        $this->loadModel();
+        $this->validate();
+        Page::find($this->modelId)->update($this->modelData());
+        $this->modalFormVisible = false;
+    }
+
+    public function delete()
+    {
+        Page::destroy($this->modelId);
+        $this->modalConfirmDeleteVisible = false;
     }
 
     /**
@@ -72,7 +79,24 @@ class Pages extends Component
      */
     public function createShowModal()
     {
+        $this->resetValidation();
+        $this->resetVars();
         $this->modalFormVisible = true;
+    }
+
+    public function updateShowModal($id)
+    {
+        $this->resetValidation();
+        $this->resetVars();
+        $this->modelId = $id;
+        $this->modalFormVisible = true;
+        $this->loadModel();
+    }
+
+    public function deleteShowModal($id)
+    {
+        $this->modelId = $id;
+        $this->modalConfirmDeleteVisible = true;
     }
 
     /**
@@ -94,7 +118,7 @@ class Pages extends Component
         $data = Page::find($this->modelId);
         $this->title = $data->title;
         $this->slug = $data->slug;
-        $this->content = $this->content;
+        $this->content = $data->content;
     }
 
     /**

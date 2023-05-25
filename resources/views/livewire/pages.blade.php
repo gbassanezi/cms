@@ -89,7 +89,7 @@
             <div class="rounded-md shadow-sm">
                 <div class="mt-1 bg-white dark:bg-gray-600">
                     <div class="body-content" wire:ignore>
-                        <trix-editor id="content" class="trix-content dark:bg-gray-800" x-ref="trix" wire:model="content"
+                        <trix-editor id="content" class="trix-content dark:bg-gray-800" x-ref="trix" wire:model.debounce.100000ms="content"
                             wire:key="trix-content-unique-key"></trix-editor>
                     </div>
                 </div>
@@ -111,6 +111,27 @@
                         {{ __('Create') }}
                         </x-danger-button>
             @endif
+        </x-slot>
+    </x-dialog-modal>
+
+    {{-- Delete Modal --}}
+    <x-dialog-modal wire:model="modalConfirmDeleteVisible">
+        <x-slot name="title">
+            {{ __('Delete Page') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Are you sure you want to delete this page? Once the page is deleted, all of its resources and data will be permanently deleted.') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('modalConfirmDeleteVisible')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-secondary-button>
+
+            <x-danger-button class="ml-2" wire:click="delete" wire:loading.attr="disabled">
+                {{ __('Delete Page') }}
+            </x-danger-button>
         </x-slot>
     </x-dialog-modal>
 </div>
