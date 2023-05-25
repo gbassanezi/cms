@@ -14,16 +14,16 @@
                     <thead>
                         <tr>
                             <th
-                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase dark:bg-gray-400 ">
+                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-300 uppercase dark:bg-gray-400 ">
                                 Title</th>
                             <th
-                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase dark:bg-gray-400 ">
+                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-300 uppercase dark:bg-gray-400 ">
                                 Link</th>
                             <th
-                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase dark:bg-gray-400 ">
+                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-300 uppercase dark:bg-gray-400 ">
                                 Content</th>
                             <th
-                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase dark:bg-gray-400 ">
+                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-300 uppercase dark:bg-gray-400 ">
                             </th>
                         </tr>
                     </thead>
@@ -55,7 +55,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">No Results Found</td>
+                                <td class="px-6 py-4 text-sm text-center text-white whitespace-no-wrap" colspan="4">No Results Found</td>
                             </tr>
                         @endif
                     </tbody>
@@ -87,9 +87,9 @@
             </div>
             <x-label for="content" value="{{ __('Content') }}" />
             <div class="rounded-md shadow-sm">
-                <div class="mt-1 bg-white">
+                <div class="mt-1 bg-white dark:bg-gray-600">
                     <div class="body-content" wire:ignore>
-                        <trix-editor id="content" class="trix-content" x-ref="trix" wire:model="content"
+                        <trix-editor id="content" class="trix-content dark:bg-gray-800" x-ref="trix" wire:model="content"
                             wire:key="trix-content-unique-key"></trix-editor>
                     </div>
                 </div>
