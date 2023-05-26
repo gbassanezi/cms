@@ -5,9 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Page;
 use Illuminate\Validation\Rule;
+use Livewire\WithPagination;
 
 class Pages extends Component
 {
+    use WithPagination;
     public $modelId;
     public $title;
     public $slug;
@@ -24,9 +26,14 @@ class Pages extends Component
     {
         return [
             'title' => 'required',
-            'slug' => ['required', Rule::unique('pages', 'slug')],
+            'slug' => ['required', Rule::unique('pages', 'slug')->ignore($this->modelId)],
             'content' => 'required'
         ];
+    }
+
+    public function mount()
+    {
+        $this->resetPage();
     }
 
     /**

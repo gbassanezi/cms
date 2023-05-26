@@ -55,7 +55,8 @@
                             @endforeach
                         @else
                             <tr>
-                                <td class="px-6 py-4 text-sm text-center text-white whitespace-no-wrap" colspan="4">No Results Found</td>
+                                <td class="px-6 py-4 text-sm text-center text-white whitespace-no-wrap" colspan="4">
+                                    No Results Found</td>
                             </tr>
                         @endif
                     </tbody>
@@ -83,14 +84,14 @@
                     class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200">https://localhost/</span>
                 <x-input type="text" id="slug" wire:model="slug" class="rounded dark:bg-gray-800"
                     placeholder="slug here" />
-                <x-input-error for="slug" class="mt-2" />
             </div>
+            <x-input-error for="slug" class="mt-2" />
             <x-label for="content" value="{{ __('Content') }}" />
             <div class="rounded-md shadow-sm">
                 <div class="mt-1 bg-white dark:bg-gray-600">
                     <div class="body-content" wire:ignore>
-                        <trix-editor id="content" class="trix-content dark:bg-gray-800" x-ref="trix" wire:model.debounce.100000ms="content"
-                            wire:key="trix-content-unique-key"></trix-editor>
+                        <trix-editor id="content" class="trix-content dark:bg-gray-800" x-ref="trix"
+                            wire:model.debounce.100000ms="content" wire:key="trix-content-unique-key"></trix-editor>
                     </div>
                 </div>
             </div>
