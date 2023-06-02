@@ -149,6 +149,7 @@ class Pages extends Component
      */
     public function resetVars()
     {
+        $this->modelId = null;
         $this->title = null;
         $this->slug = null;
         $this->content = null;

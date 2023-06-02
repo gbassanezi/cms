@@ -85,7 +85,7 @@
                 <x-input type="text" id="slug" wire:model="slug" class="rounded dark:bg-gray-800"
                     placeholder="slug here" />
             </div>
-            <x-input-error for="slug" class="mt-2" />
+            <x-input-error for="slug" class="mt-2" /><br>
             <x-label for="content" value="{{ __('Content') }}" />
             <div class="rounded-md shadow-sm">
                 <div class="mt-1 bg-white dark:bg-gray-600">
@@ -106,11 +106,11 @@
             @if ($modelId)
                 <x-button class="ml-2" wire:click="update" wire:loading.attr="disabled">
                     {{ __('Update') }}
-                    </x-danger-button>
-                @else
-                    <x-button class="ml-2" wire:click="create" wire:loading.attr="disabled">
-                        {{ __('Create') }}
-                        </x-danger-button>
+                </x-button>
+            @else
+                <x-button class="ml-2" wire:click="create" wire:loading.attr="disabled">
+                    {{ __('Create') }}
+                </x-button>
             @endif
         </x-slot>
     </x-dialog-modal>
