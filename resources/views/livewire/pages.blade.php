@@ -31,7 +31,7 @@
                         @if ($data->count())
                             @foreach ($data as $item)
                                 <tr>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">
+                                    <td class="px-6 py-4 text-sm text-white whitespace-no-wrap">
                                         {{ $item->title }}
                                         {!! $item->is_default_home ? '<span class="text-xs font-bold text-green-400">[Default Home Page]</span>' : '' !!}
                                         {!! $item->is_default_not_found ? '<span class="text-xs font-bold text-red-400">[Default 404 Page]</span>' : '' !!}
@@ -42,7 +42,7 @@
                                             {{ $item->slug }}
                                         </a>
                                     </td>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap">{!! \Illuminate\Support\Str::limit($item->content, 50, '...') !!}</td>
+                                    <td class="px-6 py-4 text-sm text-white whitespace-no-wrap">{!! \Illuminate\Support\Str::limit($item->content, 50, '...') !!}</td>
                                     <td class="px-6 py-4 text-sm text-right">
                                         <x-button wire:click="updateShowModal({{ $item->id }})">
                                             {{ __('Update') }}
@@ -73,11 +73,26 @@
         <x-slot name="title">
             {{ __('Save Page') }} {{ $modelId }}
         </x-slot>
+
         <x-slot name="content">
             <x-label for="title" value="{{ __('Title') }}" />
             <x-input id="title" type="text" class="block w-full mt-1" wire:model.debounce.800ms="title"
                 autofocus />
             <x-input-error for="title" class="mt-2" /><br>
+
+            <div class="mt-4">
+                <label>
+                    <input class="form-checkbox" type="checkbox" value="{{ $isSetToDefaultHomePage }}" wire:model="isSetToDefaultHomePage"/>
+                    <span class="ml-2 text-sm text-gray-600">Set as the default home page</span>
+                </label>
+            </div>
+            <div class="mt-4">
+                <label>
+                    <input class="form-checkbox" type="checkbox" value="{{ $isSetToDefaultNotFoundPage }}" wire:model="isSetToDefaultNotFoundPage"/>
+                    <span class="ml-2 text-sm text-red-600">Set as the default 404 error page</span>
+                </label>
+            </div><br>
+
             <x-label for="slug" value="{{ __('Slug') }}" />
             <div class="relative flex flex-wrap items-stretch w-full mb-4">
                 <span
@@ -86,6 +101,7 @@
                     placeholder="slug here" />
             </div>
             <x-input-error for="slug" class="mt-2" /><br>
+
             <x-label for="content" value="{{ __('Content') }}" />
             <div class="rounded-md shadow-sm">
                 <div class="mt-1 bg-white dark:bg-gray-600">

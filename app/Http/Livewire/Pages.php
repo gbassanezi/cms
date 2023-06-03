@@ -16,6 +16,8 @@ class Pages extends Component
     public $content;
     public $modalFormVisible = false;
     public $modalConfirmDeleteVisible = false;
+    public $isSetToDefaultHomePage;
+    public $isSetToDefaultNotFoundPage;
 
     /**
      * Our validation rules when receveing the data from the modal
@@ -46,6 +48,16 @@ class Pages extends Component
     public function updatedTitle($value)
     {
         $this->generateSlug($value);
+    }
+
+    public function updatedIsSetToDefaultNotFoundPage()
+    {
+        $this->isSetToDefaultHomePage = null;
+    }
+
+    public function updatedIsSetToDefaultHomePage()
+    {
+        $this->isSetToDefaultNotFoundPage = null;
     }
 
     /**
@@ -117,6 +129,8 @@ class Pages extends Component
             'title' => $this->title,
             'slug' => $this->slug,
             'content' => $this->content,
+            'is_default_home' => $this->isSetToDefaultHomePage,
+            'is_default_not_found' => $this->isSetToDefaultNotFoundPage
         ];
     }
 
