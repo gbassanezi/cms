@@ -19,6 +19,7 @@ class Pages extends Component
     public $isSetToDefaultHomePage;
     public $isSetToDefaultNotFoundPage;
 
+
     /**
      * Our validation rules when receveing the data from the modal
      *
@@ -68,6 +69,8 @@ class Pages extends Component
     public function create()
     {
         $this->validate();
+        $this->unassignDefaultHomePage();
+        $this->unassignDefaultNotFoundPage();
         Page::create($this->modelData());
         $this->modalFormVisible = false;
         $this->resetVars();
@@ -81,6 +84,8 @@ class Pages extends Component
     public function update()
     {
         $this->validate();
+        $this->unassignDefaultHomePage();
+        $this->unassignDefaultNotFoundPage();
         Page::find($this->modelId)->update($this->modelData());
         $this->modalFormVisible = false;
     }
@@ -140,6 +145,8 @@ class Pages extends Component
         $this->title = $data->title;
         $this->slug = $data->slug;
         $this->content = $data->content;
+        $this->isSetToDefaultHomePage = !$data->is_default_home ? null : true;
+        $this->isSetToDefaultNotFoundPage = !$data->is_default_not_found ? null : true;
     }
 
     /**
@@ -154,6 +161,29 @@ class Pages extends Component
         $first = str_replace(' ', '-', $value);
         $second = strtolower($first);
         $this->slug = $second;
+    }
+
+    private function unassignDefaultHomePage()
+    {
+        if ($this->isSetToDefaultHomePage != null) {
+            Page::where('is_default_home', true)->update([
+                'is_default_home' => false,
+            ]);
+        }
+    }
+
+    /**
+     * Unassigns the default 404 page in the database table
+     *
+     * @return void
+     */
+    private function unassignDefaultNotFoundPage()
+    {
+        if ($this->isSetToDefaultNotFoundPage != null) {
+            Page::where('is_default_not_found', true)->update([
+                'is_default_not_found' => false,
+            ]);
+        }
     }
 
     /**

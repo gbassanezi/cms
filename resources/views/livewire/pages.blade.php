@@ -34,7 +34,7 @@
                                     <td class="px-6 py-4 text-sm text-white whitespace-no-wrap">
                                         {{ $item->title }}
                                         {!! $item->is_default_home ? '<span class="text-xs font-bold text-green-400">[Default Home Page]</span>' : '' !!}
-                                        {!! $item->is_default_not_found ? '<span class="text-xs font-bold text-red-400">[Default 404 Page]</span>' : '' !!}
+                                        {!! $item->is_default_not_found ? '<span class="text-xs font-bold text-red-600">[Default 404 Page]</span>' : '' !!}
                                     </td>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap">
                                         <a class="text-indigo-600 hover:text-indigo-900" target="_blank"
@@ -83,7 +83,7 @@
             <div class="mt-4">
                 <label>
                     <input class="form-checkbox" type="checkbox" value="{{ $isSetToDefaultHomePage }}" wire:model="isSetToDefaultHomePage"/>
-                    <span class="ml-2 text-sm text-gray-600">Set as the default home page</span>
+                    <span class="ml-2 text-sm text-green-400">Set as the default home page</span>
                 </label>
             </div>
             <div class="mt-4">
