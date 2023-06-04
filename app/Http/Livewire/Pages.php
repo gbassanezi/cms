@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Page;
 use Illuminate\Validation\Rule;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class Pages extends Component
 {
@@ -48,7 +49,7 @@ class Pages extends Component
      */
     public function updatedTitle($value)
     {
-        $this->generateSlug($value);
+        $this->slug = Str::slug($value);
     }
 
     public function updatedIsSetToDefaultHomePage()
@@ -73,7 +74,7 @@ class Pages extends Component
         $this->unassignDefaultNotFoundPage();
         Page::create($this->modelData());
         $this->modalFormVisible = false;
-        $this->resetVars();
+        $this->reset();
     }
 
     public function read()
@@ -104,14 +105,14 @@ class Pages extends Component
     public function createShowModal()
     {
         $this->resetValidation();
-        $this->resetVars();
+        $this->reset();
         $this->modalFormVisible = true;
     }
 
     public function updateShowModal($id)
     {
         $this->resetValidation();
-        $this->resetVars();
+        $this->reset();
         $this->modelId = $id;
         $this->modalFormVisible = true;
         $this->loadModel();
@@ -184,21 +185,6 @@ class Pages extends Component
                 'is_default_not_found' => false,
             ]);
         }
-    }
-
-    /**
-     * Reset the variables in the form
-     *
-     * @return void
-     */
-    public function resetVars()
-    {
-        $this->modelId = null;
-        $this->title = null;
-        $this->slug = null;
-        $this->content = null;
-        $this->isSetToDefaultHomePage = null;
-        $this->isSetToDefaultNotFoundPage = null;
     }
 
     /**
