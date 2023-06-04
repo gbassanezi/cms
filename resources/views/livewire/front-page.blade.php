@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-    @include('guest.sidebar')
+    {{-- @include('guest.sidebar') --}}
 
     <!-- Page Heading -->
     @if (isset($header))
@@ -12,7 +12,8 @@
 
     <!-- Page Content -->
     <main>
-
+        {!! $content !!}
+        fsadfasdfasd
     </main>
 </div>
 

@@ -51,14 +51,14 @@ class Pages extends Component
         $this->generateSlug($value);
     }
 
-    public function updatedIsSetToDefaultNotFoundPage()
-    {
-        $this->isSetToDefaultHomePage = null;
-    }
-
     public function updatedIsSetToDefaultHomePage()
     {
         $this->isSetToDefaultNotFoundPage = null;
+    }
+
+    public function updatedIsSetToDefaultNotFoundPage()
+    {
+        $this->isSetToDefaultHomePage = null;
     }
 
     /**
@@ -145,8 +145,8 @@ class Pages extends Component
         $this->title = $data->title;
         $this->slug = $data->slug;
         $this->content = $data->content;
-        $this->isSetToDefaultHomePage = !$data->is_default_home ? null : true;
-        $this->isSetToDefaultNotFoundPage = !$data->is_default_not_found ? null : true;
+        $this->isSetToDefaultHomePage = !$data->is_default_home ? null:true;
+        $this->isSetToDefaultNotFoundPage = !$data->is_default_not_found ? null:true;
     }
 
     /**
@@ -156,7 +156,7 @@ class Pages extends Component
      *
      * @return void
      */
-    public function generateSlug($value)
+    private function generateSlug($value)
     {
         $first = str_replace(' ', '-', $value);
         $second = strtolower($first);
@@ -197,6 +197,8 @@ class Pages extends Component
         $this->title = null;
         $this->slug = null;
         $this->content = null;
+        $this->isSetToDefaultHomePage = null;
+        $this->isSetToDefaultNotFoundPage = null;
     }
 
     /**
