@@ -32,6 +32,9 @@
                             <th
                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-300 uppercase dark:bg-gray-400 ">
                             </th>
+                            <th
+                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-300 uppercase dark:bg-gray-400 ">
+                            </th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:bg-gray-800">
