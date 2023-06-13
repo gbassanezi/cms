@@ -7,7 +7,7 @@
                     <path d="M4 6l16 0" />
                     <path d="M4 12l16 0" />
                     <path d="M4 18l12 0" />
-                  </svg>
+                </svg>
             </button>
         </div>
         <div class="flex items-center w-full h-12 ">
@@ -17,7 +17,7 @@
         </div>
         <div class="flex justify-end sm:w-8/12">
             {{-- Top Navigation --}}
-            <ul class="hidden text-xs text-gray-200 sm:flex sm:text-left">
+            <ul class="hidden text-xs text-white sm:flex sm:text-left">
                 @foreach ($topNavLinks as $item)
                     <a href="{{ url('/'.$item->slug) }}">
                         <li class="px-4 py-2 cursor-pointer hover:bg-gray-800">{{ $item->label }}</li>
@@ -29,17 +29,17 @@
     <div class="sm:flex sm:min-h-screen">
         <aside class="text-gray-700 bg-gray-900 divide-y divide-gray-700 divide-dashed sm:w-4/12 md:w-3/12 lg:w-2/12">
             {{-- Desktop Web View --}}
-            <ul class="hidden text-xs text-gray-200 sm:block sm:text-left">
+            <ul class="hidden text-xs text-white sm:block sm:text-left">
                 @foreach ($sideBarLinks as $item)
                     <a href="{{ url('/'.$item->slug) }}">
-                        <li class="px-4 py-2 cursor-pointer hover:bg-gray-800">{{ $item->label }}</li>
+                        <li class="px-4 py-2 border cursor-pointer hover:bg-gray-800">{{ $item->label }}</li>
                     </a>
                 @endforeach
             </ul>
 
             {{-- Mobile Web View --}}
             <div :class="show ? 'block' : 'hidden'" class="block pb-3 divide-y divide-gray-800 sm:hidden">
-                <ul class="text-xs text-gray-200">
+                <ul class="text-xs text-white">
                     @foreach ($sideBarLinks as $item)
                         <a href="{{ url('/'.$item->slug) }}">
                             <li class="px-4 py-2 cursor-pointer hover:bg-gray-800">{{ $item->label }}</li>
@@ -48,7 +48,7 @@
                 </ul>
 
                 {{-- Top Navigation Mobile Web View --}}
-                <ul class="text-xs text-gray-200">
+                <ul class="text-xs text-white">
                     @foreach ($topNavLinks as $item)
                         <a href="{{ url('/'.$item->slug) }}">
                             <li class="px-4 py-2 cursor-pointer hover:bg-gray-800">{{ $item->label }}</li>
