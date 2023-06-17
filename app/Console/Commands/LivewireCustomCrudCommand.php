@@ -39,16 +39,19 @@ class LivewireCustomCrudCommand extends Command
      */
     public function handle()
     {
-        $this->info('Creates a custom livewire commando to generate crud');
+        $this->info('Creates a custom livewire command to generate crud');
 
 
         //Get all the parameters
+        $this->info('Getting the parameters...' . "\n \n");
         $this->getParamethers();
 
         //Generate the Livewire Class File
+        $this->info('Generating the Livewire Class File...' . "\n \n");
         $this->generateLivewireCrudClassFile();
 
         //Generate the Livewire View File
+        $this->info('Generating the View File...' . "\n");
         $this->generateLivewireCrudViewFile();
     }
 
