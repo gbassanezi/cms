@@ -23,6 +23,14 @@
                     <x-nav-link href="{{ route('nav-menus') }}" :active="request()->routeIs('nav-menus')">
                         {{ __('Navigation Menus') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                        {{ __('Users') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('user-permissions') }}" :active="request()->routeIs('user-permissions')">
+                        {{ __('User Permissions') }}
+                    </x-nav-link>
                 </div>
             </div>
 

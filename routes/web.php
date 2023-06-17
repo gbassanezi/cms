@@ -3,17 +3,6 @@
 use App\Http\Livewire\FrontPage;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,6 +24,14 @@ Route::group(['middleware' => [
     Route::get('navigation-menus', function(){
         return view('admin.navmenus');
     })->name('nav-menus');
+
+    Route::get('users', function(){
+        return view('admin.users');
+    })->name('users');
+
+    Route::get('user-permissions', function(){
+        return view('admin.user-permissions');
+    })->name('user-permissions');
 });
 
 

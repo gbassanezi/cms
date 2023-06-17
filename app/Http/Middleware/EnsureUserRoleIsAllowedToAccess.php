@@ -17,18 +17,19 @@ class EnsureUserRoleIsAllowedToAccess
     public function handle(Request $request, Closure $next): Response
     {
 
-        $userRole = auth()->user()->role;
-        $route = Route::currentRouteName();
+        try {
+            $userRole = auth()->user()->role;
+            $route = Route::currentRouteName();
 
-        // echo 'from the logic, we need harmony of body and mind so we can archive bigger purposes!<br/>';
-        // echo 'Olá ' . $userRole . ' vc não tem permissão de acesso a ' . $route . '!';
+            if(in_array($route, $this->userAccessRole()[$userRole])){
+                return $next($request);
+            }else{
+                abort(403, 'Ur not allowed here o.o');
+            }
 
-        if(in_array($route, $this->userAccessRole()[$userRole])){
-            return $next($request);
-        }else{
+        } catch (\Throwable $th) {
             abort(403, 'Ur not allowed here o.o');
         }
-
     }
 
     private function userAccessRole()
@@ -40,7 +41,10 @@ class EnsureUserRoleIsAllowedToAccess
             'admin' => [
                 'pages',
                 'nav-menus',
+                'dashboard',
+                'users',
+                'users-permissions'
             ]
-            ];
+        ];
     }
 }
