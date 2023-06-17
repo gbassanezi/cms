@@ -90,7 +90,17 @@ class LivewireCustomCrudCommand extends Command
 
         // $this->info($fileOriginalString); // write the content of the file on the cli
 
-        $this->file->put($fileDestination, $fileOriginalString);
+        $replaceFileOriginalString = Str::replaceArray('{{}}',
+            [
+                $this->nameOfTheModelClass,
+                $this->nameOfTheClass,
+                $this->nameOfTheModelClass,
+            ],
+            $fileOriginalString
+        );
+
+
+        $this->file->put($fileDestination, $replaceFileOriginalString);
         $this->info('Make your wishes come true *-*.'
         . "\n \n" .
         'As you wanted the livewire class file ' . $fileDestination . ' was created.');
