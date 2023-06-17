@@ -49,6 +49,7 @@ class LivewireCustomCrudCommand extends Command
         $this->generateLivewireCrudClassFile();
 
         //Generate the Livewire View File
+        $this->generateLivewireCrudViewFile();
     }
 
     /**
@@ -86,6 +87,12 @@ class LivewireCustomCrudCommand extends Command
         $fileOrigin = base_path('/stubs/custom.livewire.crud.stub');
         $fileDestination = base_path('/app/Http/Livewire' . $this->nameOfTheClass . '.php');
 
+        if($this->file->exists($fileDestination)){
+            $this->info('This class file alredy exists: ' . $this->nameOfTheClass . '.php');
+            $this->info('!!! Aborting class file creation !!!' . "\n \n");
+            return false;
+        }
+
         $fileOriginalString = $this->file->get($fileOrigin);
 
         // $this->info($fileOriginalString); // write the content of the file on the cli
@@ -109,6 +116,21 @@ class LivewireCustomCrudCommand extends Command
         $this->info('Make your wishes come true *-*.'
         . "\n \n" .
         'As you wanted the livewire class file ' . $fileDestination . ' was created.');
+    }
 
+    protected function generateLivewireCrudViewFile()
+    {
+        //Set the origin and destination for the livewire class file
+        $fileOrigin = base_path('/stubs/custom.livewire.crud.view.stub');
+        $fileDestination = base_path('/resources/views/livewire' . Str::kebab($this->nameOfTheClass) . '.blade.php');
+
+        if($this->file->exists($fileDestination)){
+            $this->info('This view file alredy exists: ' . Str::kebab($this->nameOfTheClass) . '.php');
+            $this->info('!!! Aborting view creation !!!' ."\n \n");
+            return false;
+        }
+
+        $this->file->copy($fileOrigin, $fileDestination);
+        $this->info('As you wish O.O' . "\n \n" . 'Laravel view file created:' . $fileDestination);
     }
 }
