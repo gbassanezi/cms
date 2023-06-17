@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Illuminate\Filesystem\Filesystem;
 
 class LivewireCustomCrudCommand extends Command
 {
@@ -25,10 +26,12 @@ class LivewireCustomCrudCommand extends Command
      */
     protected $nameOfTheClass;
     protected $nameOfTheModelClass;
+    protected $file;
 
     public function __construct()
     {
         parent::__construct();
+        $this->file = new Filesystem();
     }
 
     /**
@@ -71,7 +74,7 @@ class LivewireCustomCrudCommand extends Command
         $this->nameOfTheModelClass = Str::studly($this->nameOfTheModelClass);
 
 
-        $this->info($this->nameOfTheClass . ' ' . $this->nameOfTheModelClass);
+        $this->info('New Class:' . $this->nameOfTheClass . 'created!' . "\n" . 'New Model Class:' . $this->nameOfTheModelClass . 'created!' . "\n");
     }
 
     /**
@@ -79,6 +82,18 @@ class LivewireCustomCrudCommand extends Command
      */
     protected function generateLivewireCrudClassFile()
     {
+        //Set the origin and destination for the livewire class file
+        $fileOrigin = base_path('/stubs/custom.livewire.crud.stub');
+        $fileDestination = base_path('/app/Http/Livewire' . $this->nameOfTheClass . '.php');
+
+        $fileOriginalString = $this->file->get($fileOrigin);
+
+        // $this->info($fileOriginalString); // write the content of the file on the cli
+
+        $this->file->put($fileDestination, $fileOriginalString);
+        $this->info('Make your wishes come true *-*.'
+        . "\n \n" .
+        'As you wanted the livewire class file ' . $fileDestination . ' was created.');
 
     }
 }
