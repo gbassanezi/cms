@@ -95,6 +95,11 @@ class LivewireCustomCrudCommand extends Command
                 $this->nameOfTheModelClass,
                 $this->nameOfTheClass,
                 $this->nameOfTheModelClass,
+                $this->nameOfTheModelClass,
+                $this->nameOfTheModelClass,
+                $this->nameOfTheModelClass,
+                $this->nameOfTheModelClass,
+                Str::kebab($this->nameOfTheClass),
             ],
             $fileOriginalString
         );

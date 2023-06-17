@@ -25,6 +25,54 @@ class {{}} extends Component
         ];
     }
 
+    public function create()
+    {
+        $this->validate();
+        {{}}::create($this->modelData());
+        $this->modalFormVisible = false;
+        $this->reset();
+    }
+
+    public function read()
+    {
+        return {{}}::paginate(5);
+    }
+
+    public function update()
+    {
+        $this->validate();
+        {{}}::find($this->modelId)->update($this->modelData());
+        $this->modalFormVisible = false;
+    }
+
+    public function delete()
+    {
+        {{}}::destroy($this->modelId);
+        $this->modalConfirmDeleteVisible = false;
+    }
+
+    public function createShowModal()
+    {
+        $this->resetValidation();
+        $this->reset();
+        $this->modalFormVisible = true;
+    }
+
+    public function updateShowModal($id)
+    {
+        $this->resetValidation();
+        $this->reset();
+        $this->modalFormVisible = true;
+        $this->modelId = $id;
+        $this->loadModel();
+    }
+
+    public function deleteShowModal($id)
+    {
+        $this->modelId = $id;
+        $this->modalConfirmDeleteVisible = true;
+    }
+
     public function loadModel()
     {
         $data = {{}}::find($this->modelId);
@@ -38,4 +86,10 @@ class {{}} extends Component
         ];
     }
 
+    public function render()
+    {
+        return view('livewire.{{}}', [
+            'data' => $this->read(),
+        ]);
+    }
 }
