@@ -39,15 +39,15 @@ class LivewireCustomCrudCommand extends Command
      */
     public function handle()
     {
-        $this->info('Creates a custom livewire command to generate crud');
+        $this->info('Creates a custom livewire command to generate crud' . "\n \n");
 
 
         //Get all the parameters
-        $this->info('Getting the parameters...' . "\n \n");
+        $this->info('Getting the parameters...');
         $this->getParamethers();
 
         //Generate the Livewire Class File
-        $this->info('Generating the Livewire Class File...' . "\n \n");
+        $this->info('Generating the Livewire Crud Class File...' . "\n \n");
         $this->generateLivewireCrudClassFile();
 
         //Generate the Livewire View File
@@ -76,9 +76,6 @@ class LivewireCustomCrudCommand extends Command
 
         $this->nameOfTheClass = Str::studly($this->nameOfTheClass);
         $this->nameOfTheModelClass = Str::studly($this->nameOfTheModelClass);
-
-
-        $this->info('New Class:' . $this->nameOfTheClass . 'created!' . "\n" . 'New Model Class:' . $this->nameOfTheModelClass . 'created!' . "\n");
     }
 
     /**
@@ -88,7 +85,7 @@ class LivewireCustomCrudCommand extends Command
     {
         //Set the origin and destination for the livewire class file
         $fileOrigin = base_path('/stubs/custom.livewire.crud.stub');
-        $fileDestination = base_path('/app/Http/Livewire' . $this->nameOfTheClass . '.php');
+        $fileDestination = base_path('/app/Http/Livewire/' . $this->nameOfTheClass . '.php');
 
         if($this->file->exists($fileDestination)){
             $this->info('This class file alredy exists: ' . $this->nameOfTheClass . '.php');
@@ -125,7 +122,7 @@ class LivewireCustomCrudCommand extends Command
     {
         //Set the origin and destination for the livewire class file
         $fileOrigin = base_path('/stubs/custom.livewire.crud.view.stub');
-        $fileDestination = base_path('/resources/views/livewire' . Str::kebab($this->nameOfTheClass) . '.blade.php');
+        $fileDestination = base_path('/resources/views/livewire/' . Str::kebab($this->nameOfTheClass) . '.blade.php');
 
         if($this->file->exists($fileDestination)){
             $this->info('This view file alredy exists: ' . Str::kebab($this->nameOfTheClass) . '.php');
