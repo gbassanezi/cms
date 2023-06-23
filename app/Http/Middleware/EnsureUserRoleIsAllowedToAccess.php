@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\UserPermissions;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ class EnsureUserRoleIsAllowedToAccess
             $userRole = auth()->user()->role;
             $route = Route::currentRouteName();
 
-            if(in_array($route, $this->userAccessRole()[$userRole])){
+            if(UserPermissions::isRoleHasRightToAccess($userRole, $route) || in_array($route, $this->defaultUserAccessRole()[$userRole])){
                 return $next($request);
             }else{
                 abort(403, 'Ur not allowed here o.o');
@@ -32,18 +33,11 @@ class EnsureUserRoleIsAllowedToAccess
         }
     }
 
-    private function userAccessRole()
+    private function defaultUserAccessRole()
     {
         return [
-            'user' => [
-                'dashboard'
-            ],
             'admin' => [
-                'pages',
-                'nav-menus',
-                'dashboard',
-                'users',
-                'users-permissions'
+                'user-permissions'
             ]
         ];
     }
