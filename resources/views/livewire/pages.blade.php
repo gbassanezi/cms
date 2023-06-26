@@ -1,6 +1,11 @@
 <div class="p-6">
     <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
-        <x-button wire:click='createShowModal'>
+
+        <x-button class="mr-5" wire:click='dispacthEvent'>
+            {{ __('Dispatch Event') }}
+        </x-button>
+
+        <x-button class="mr-5" wire:click='createShowModal'>
             {{ __('Create') }}
         </x-button>
     </div>

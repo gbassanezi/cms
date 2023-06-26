@@ -42,5 +42,25 @@
         @stack('modals')
 
         @livewireScripts
+        <script>
+
+            function clientSocket(config = {}){
+                let route = config.route || "127.0.0.1";
+                let port = config.port || "3280";
+                window.WebSocket = window.WebSocket || window.MozWebSocket;
+                return new WebSocket("ws://" + route + ":" + port);
+            }
+
+            // Instatiate a connection
+            var connection = clientSocket()
+
+            connection.onopen = function () {
+                console.log("Connection is open")
+            }
+
+            window.addEventListener('event-notification', event => {
+                alert('Event: ' + event.detail.eventName)
+            })
+        </script>
     </body>
 </html>

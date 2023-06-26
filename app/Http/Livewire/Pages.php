@@ -187,6 +187,14 @@ class Pages extends Component
         }
     }
 
+    public function dispacthEvent()
+    {
+        $this->dispatchBrowserEvent('event-notification', [
+            'eventName' => 'Sample Event',
+            'eventMessage' => 'You have a sample event notification!'
+        ]);
+    }
+
     /**
      * Render our pages livewire component
      *
